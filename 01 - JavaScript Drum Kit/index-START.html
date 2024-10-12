@@ -59,8 +59,9 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-//add event listener to window object for a 'keydown' event
-window.addEventListener('keydown', function(e) {
+
+//function to play sound based on key pressed 
+function playSound(e){
   //find audio element with data-key attribute that matches key code of key pressed  
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   //find key element with data-key attribute that matches key code of key pressed
@@ -73,7 +74,7 @@ window.addEventListener('keydown', function(e) {
   audio.play();
   //add a playing' class to key key div to visually indicate that it's being pressed
   key.classList.add('playing');
-});
+}
 
 //function to remove the 'playing' class after CSS transition ends
 function removeTransition(e) {
@@ -90,6 +91,8 @@ const keys = document.querySelectorAll('.key');
 //removeTransition function will be called when CSS transition ends
 keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
+//add event listener to window object for a 'keydown' event
+window.addEventListener('keydown');
 
 </script>
 
