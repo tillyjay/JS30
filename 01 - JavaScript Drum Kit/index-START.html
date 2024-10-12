@@ -92,7 +92,8 @@ const keys = document.querySelectorAll('.key');
 keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
 //add event listener to window object for a 'keydown' event
-window.addEventListener('keydown');
+//when key is pressed, playSound function is triggered
+window.addEventListener('keydown', playSound);
 
 </script>
 
