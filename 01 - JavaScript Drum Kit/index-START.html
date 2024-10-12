@@ -61,19 +61,35 @@
 <script>
 //add event listener to window object for a 'keydown' event
 window.addEventListener('keydown', function(e) {
-//find audio element with data-key attribute that matches key code of key pressed  
+  //find audio element with data-key attribute that matches key code of key pressed  
   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
   //find key element with data-key attribute that matches key code of key pressed
   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
   //if no audio element for pressed key, stop function from running 
-  if (!audio) return;
+  if(!audio) return;
   //reset audio's currentTime to 0, so it can be played again quickly if key is pressed multiple times
-  audio.currentTime = 0;
+  audio.currentTime = 0; 
   //play audio with associated key
   audio.play();
   //add a playing' class to key key div to visually indicate that it's being pressed
   key.classList.add('playing');
 });
+
+//function to remove the 'playing' class after CSS transition ends
+function removeTransition(e) {
+  //only remove class if event is related to 'transform' property
+  if(e.propertyName !== 'transform') return;
+  //remove 'playing' class from key div to reset visual effect
+  this.classList.remove('playing');
+}
+
+//select all key elements (divs) that have 'key' class
+const keys = document.querySelectorAll('.key');
+
+//add event listener for end of transition to each key div
+//removeTransition function will be called when CSS transition ends
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
 
 </script>
 
